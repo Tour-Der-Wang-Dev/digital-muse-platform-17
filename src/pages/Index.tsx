@@ -1,3 +1,4 @@
+
 import { PremiumHeader } from "@/components/PremiumHeader";
 import { HeroSection } from "@/components/HeroSection";
 import { CreativeStudio } from "@/components/CreativeStudio";
@@ -10,6 +11,7 @@ import { CommunityLearning } from "@/components/CommunityLearning";
 import { CommercialLicensing } from "@/components/CommercialLicensing";
 import { ProfessionalFeatures } from "@/components/ProfessionalFeatures";
 import { QualityEthics } from "@/components/QualityEthics";
+import { MarketingSection } from "@/components/MarketingSection";
 import { PremiumFooter } from "@/components/PremiumFooter";
 import { WorkspaceManager } from "@/components/WorkspaceManager";
 import { PerformanceMonitor } from "@/components/PerformanceMonitor";
@@ -28,6 +30,7 @@ const Index = () => {
         <SkillDevelopment />
         <CommunityLearning />
         <ArtistGallery />
+        <MarketingSection />
         <CommercialLicensing />
         <ProfessionalFeatures />
         <QualityEthics />
