@@ -1,4 +1,3 @@
-
 import { PremiumHeader } from "@/components/PremiumHeader";
 import { HeroSection } from "@/components/HeroSection";
 import { CreativeStudio } from "@/components/CreativeStudio";
@@ -12,6 +11,8 @@ import { CommercialLicensing } from "@/components/CommercialLicensing";
 import { ProfessionalFeatures } from "@/components/ProfessionalFeatures";
 import { QualityEthics } from "@/components/QualityEthics";
 import { PremiumFooter } from "@/components/PremiumFooter";
+import { WorkspaceManager } from "@/components/WorkspaceManager";
+import { PerformanceMonitor } from "@/components/PerformanceMonitor";
 
 const Index = () => {
   return (
@@ -20,6 +21,7 @@ const Index = () => {
       <main>
         <HeroSection />
         <CreativeStudio />
+        <WorkspaceManager />
         <StyleShowcase />
         <StyleSystem />
         <LearningCenter />
@@ -31,6 +33,7 @@ const Index = () => {
         <QualityEthics />
       </main>
       <PremiumFooter />
+      <PerformanceMonitor />
     </div>
   );
 };

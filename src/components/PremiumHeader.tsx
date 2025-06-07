@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import { Menu, Star } from "lucide-react";
 import { useState } from "react";
@@ -24,6 +23,9 @@ export const PremiumHeader = () => {
           <nav className="hidden md:flex items-center space-x-8">
             <a href="#studio" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium">
               Studio
+            </a>
+            <a href="#workspace" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium">
+              Workspace
             </a>
             <a href="#gallery" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium">
               Gallery
@@ -76,6 +78,9 @@ export const PremiumHeader = () => {
             <nav className="flex flex-col space-y-3">
               <a href="#studio" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium py-2">
                 Studio
+              </a>
+              <a href="#workspace" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium py-2">
+                Workspace
               </a>
               <a href="#gallery" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium py-2">
                 Gallery

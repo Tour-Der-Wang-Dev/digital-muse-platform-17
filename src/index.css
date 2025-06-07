@@ -45,6 +45,22 @@
     --sidebar-accent-foreground: 45 100% 85%;
     --sidebar-border: 20 20% 15%;
     --sidebar-ring: 45 100% 51%;
+
+    /* Animation duration variable for accessibility */
+    --animation-duration: 0.3s;
+  }
+
+  /* High contrast theme */
+  .high-contrast {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+    --border: 0 0% 100%;
+    --primary: 60 100% 50%;
+  }
+
+  /* Large text theme */
+  .large-text {
+    font-size: 1.125em;
   }
 }
 
@@ -61,6 +77,25 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-playfair;
   }
+
+  /* Accessibility improvements */
+  *:focus {
+    @apply outline-none ring-2 ring-gold-500 ring-offset-2 ring-offset-background;
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Skip link for screen readers */
+  .skip-link {
+    @apply absolute -top-10 left-4 bg-background text-foreground px-4 py-2 rounded-md z-50 focus:top-4;
+  }
 }
 
 @layer components {
@@ -73,7 +108,8 @@
   }
   
   .premium-hover {
-    @apply transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-gold-500/20;
+    transition-duration: var(--animation-duration);
+    @apply transition-all hover:scale-105 hover:shadow-2xl hover:shadow-gold-500/20;
   }
   
   .artistic-frame {
@@ -83,6 +119,34 @@
   .artistic-frame::before {
     content: '';
     @apply absolute inset-0 bg-gradient-to-tr from-gold-500/20 via-transparent to-gold-600/20 pointer-events-none;
+  }
+
+  /* Performance optimizations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    will-change: transform;
+  }
+
+  .optimized-scroll {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Touch-friendly interactions */
+  .touch-target {
+    @apply min-h-[44px] min-w-[44px];
+  }
+
+  /* Loading states */
+  .skeleton-loading {
+    background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--muted-foreground) / 0.1) 50%, hsl(var(--muted)) 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+
+  @keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
   }
 }
 
@@ -101,4 +165,23 @@
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-gold-500/50;
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  * {
+    color: black !important;
+    background: white !important;
+  }
+}
+
+/* Dark mode improvements for better contrast */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
 }
