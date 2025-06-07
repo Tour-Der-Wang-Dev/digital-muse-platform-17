@@ -28,14 +28,17 @@ export const PremiumHeader = () => {
             <a href="#gallery" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium">
               Gallery
             </a>
+            <a href="#learning" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium">
+              Learning
+            </a>
+            <a href="#community" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium">
+              Community
+            </a>
             <a href="#styles" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium">
               Styles
             </a>
             <a href="#pricing" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium">
               Pricing
-            </a>
-            <a href="#artists" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium">
-              Artists
             </a>
           </nav>
 
@@ -71,14 +74,17 @@ export const PremiumHeader = () => {
               <a href="#gallery" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium py-2">
                 Gallery
               </a>
+              <a href="#learning" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium py-2">
+                Learning
+              </a>
+              <a href="#community" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium py-2">
+                Community
+              </a>
               <a href="#styles" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium py-2">
                 Styles
               </a>
               <a href="#pricing" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium py-2">
                 Pricing
-              </a>
-              <a href="#artists" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium py-2">
-                Artists
               </a>
             </nav>
           </div>
