@@ -3,6 +3,7 @@ import { PremiumHeader } from "@/components/PremiumHeader";
 import { HeroSection } from "@/components/HeroSection";
 import { CreativeStudio } from "@/components/CreativeStudio";
 import { StyleShowcase } from "@/components/StyleShowcase";
+import { StyleSystem } from "@/components/StyleSystem";
 import { ArtistGallery } from "@/components/ArtistGallery";
 import { LearningCenter } from "@/components/LearningCenter";
 import { SkillDevelopment } from "@/components/SkillDevelopment";
@@ -19,6 +20,7 @@ const Index = () => {
         <HeroSection />
         <CreativeStudio />
         <StyleShowcase />
+        <StyleSystem />
         <LearningCenter />
         <SkillDevelopment />
         <CommunityLearning />
