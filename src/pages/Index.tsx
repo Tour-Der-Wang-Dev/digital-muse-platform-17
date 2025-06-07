@@ -10,6 +10,7 @@ import { SkillDevelopment } from "@/components/SkillDevelopment";
 import { CommunityLearning } from "@/components/CommunityLearning";
 import { CommercialLicensing } from "@/components/CommercialLicensing";
 import { ProfessionalFeatures } from "@/components/ProfessionalFeatures";
+import { QualityEthics } from "@/components/QualityEthics";
 import { PremiumFooter } from "@/components/PremiumFooter";
 
 const Index = () => {
@@ -27,6 +28,7 @@ const Index = () => {
         <ArtistGallery />
         <CommercialLicensing />
         <ProfessionalFeatures />
+        <QualityEthics />
       </main>
       <PremiumFooter />
     </div>

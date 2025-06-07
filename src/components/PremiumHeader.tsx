@@ -40,6 +40,9 @@ export const PremiumHeader = () => {
             <a href="#style-system" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium">
               Style System
             </a>
+            <a href="#quality-ethics" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium">
+              Quality & Ethics
+            </a>
             <a href="#pricing" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium">
               Pricing
             </a>
@@ -88,6 +91,9 @@ export const PremiumHeader = () => {
               </a>
               <a href="#style-system" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium py-2">
                 Style System
+              </a>
+              <a href="#quality-ethics" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium py-2">
+                Quality & Ethics
               </a>
               <a href="#pricing" className="text-foreground/80 hover:text-gold-400 transition-colors font-medium py-2">
                 Pricing
