@@ -1,257 +1,368 @@
 
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Code, Webhook, Cloud, Zap, Copy, ExternalLink, Play } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import { Progress } from "@/components/ui/progress";
+import { 
+  Settings, 
+  Monitor, 
+  Shield, 
+  Zap, 
+  BarChart3, 
+  Clock, 
+  DollarSign, 
+  AlertTriangle,
+  CheckCircle,
+  Activity,
+  Database,
+  Globe,
+  Lock
+} from "lucide-react";
+import { useState, useEffect } from "react";
+import { replicateService, ReplicateModel } from "@/services/ReplicateService";
 
 export const APIIntegration = () => {
-  const apiEndpoints = [
-    {
-      method: "POST",
-      endpoint: "/api/v1/generate",
-      description: "Generate images with custom parameters",
-      example: `{
-  "prompt": "Professional headshot photo",
-  "style": "photorealistic",
-  "resolution": "4K",
-  "model": "portrait-pro"
-}`
-    },
-    {
-      method: "GET",
-      endpoint: "/api/v1/images/{id}",
-      description: "Retrieve generated image details",
-      example: `{
-  "id": "img_12345",
-  "status": "completed",
-  "url": "https://cdn.example.com/image.jpg",
-  "metadata": {...}
-}`
-    },
-    {
-      method: "POST",
-      endpoint: "/api/v1/batch",
-      description: "Process multiple images in batch",
-      example: `{
-  "requests": [
-    {"prompt": "Image 1", ...},
-    {"prompt": "Image 2", ...}
-  ],
-  "callback_url": "https://your-app.com/webhook"
-}`
-    }
-  ];
-
-  const integrationExamples = [
-    {
-      platform: "Adobe Photoshop",
-      description: "Plugin for direct image generation within Photoshop",
-      code: `// Photoshop CEP Extension
-const generateImage = async (prompt) => {
-  const response = await fetch('/api/v1/generate', {
-    method: 'POST',
-    headers: { 'Authorization': 'Bearer YOUR_API_KEY' },
-    body: JSON.stringify({ prompt, style: 'photorealistic' })
+  const [performanceMetrics, setPerformanceMetrics] = useState<any>(null);
+  const [costOptimization, setCostOptimization] = useState<string[]>([]);
+  const [queueStatus, setQueueStatus] = useState({
+    pending: 0,
+    processing: 3,
+    completed: 127
   });
-  return response.json();
-};`
+
+  useEffect(() => {
+    // Simulate real-time updates
+    const interval = setInterval(() => {
+      setPerformanceMetrics(replicateService.getPerformanceMetrics());
+      setCostOptimization(replicateService.getCostOptimizationSuggestions());
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const securityFeatures = [
+    {
+      icon: Shield,
+      title: "Enterprise Security",
+      description: "SOC 2 Type II compliance with end-to-end encryption",
+      status: "Active"
     },
     {
-      platform: "Figma Plugin",
-      description: "Generate images directly in your design workflow",
-      code: `// Figma Plugin
-figma.ui.onmessage = async (msg) => {
-  if (msg.type === 'generate-image') {
-    const imageData = await generateImage(msg.prompt);
-    const imageNode = figma.createRectangle();
-    imageNode.fills = [{ type: 'IMAGE', imageHash: imageData.hash }];
-  }
-};`
+      icon: Lock,
+      title: "Data Privacy",
+      description: "GDPR compliant with automatic data retention policies",
+      status: "Compliant"
     },
     {
-      platform: "WordPress",
-      description: "Auto-generate featured images for blog posts",
-      code: `// WordPress Hook
-add_action('save_post', function($post_id) {
-  if (!has_post_thumbnail($post_id)) {
-    $title = get_the_title($post_id);
-    $image_url = generate_featured_image($title);
-    set_post_thumbnail($post_id, $image_url);
-  }
-});`
+      icon: Monitor,
+      title: "Content Filtering",
+      description: "AI-powered safety checks and content moderation",
+      status: "Enabled"
+    },
+    {
+      icon: Database,
+      title: "Audit Logging",
+      description: "Comprehensive logging for compliance reporting",
+      status: "Active"
     }
   ];
 
-  const webhookEvents = [
-    { event: "image.generated", description: "Triggered when image generation is complete" },
-    { event: "image.failed", description: "Triggered when image generation fails" },
-    { event: "batch.completed", description: "Triggered when batch processing is finished" },
-    { event: "quota.exceeded", description: "Triggered when usage quota is exceeded" }
+  const performanceOptimizations = [
+    {
+      icon: Zap,
+      title: "Intelligent Caching",
+      description: "Smart caching reduces costs by 40% and improves speed",
+      enabled: true,
+      impact: "High"
+    },
+    {
+      icon: Globe,
+      title: "CDN Integration",
+      description: "Global content delivery for optimal performance",
+      enabled: true,
+      impact: "Medium"
+    },
+    {
+      icon: Activity,
+      title: "Load Balancing",
+      description: "Automatic request distribution across regions",
+      enabled: true,
+      impact: "High"
+    }
+  ];
+
+  const modelPerformance = [
+    { name: "SDXL Turbo", avgTime: "3.2s", reliability: 95, cost: "$0.01" },
+    { name: "SDXL Lightning", avgTime: "1.8s", reliability: 92, cost: "$0.005" },
+    { name: "Playground v2.5", avgTime: "5.1s", reliability: 97, cost: "$0.015" }
   ];
 
   return (
     <div className="space-y-8">
       <div className="text-center">
-        <h2 className="text-3xl font-playfair font-bold gradient-text mb-4">
-          API & Integration Platform
-        </h2>
+        <h3 className="text-3xl font-playfair font-bold mb-4 gradient-text">
+          Professional API Integration
+        </h3>
         <p className="text-foreground/70 max-w-2xl mx-auto">
-          Powerful APIs and seamless integrations to connect our AI generation 
-          capabilities with your existing creative workflows.
+          Advanced Replicate API integration with enterprise-grade performance, 
+          security, and monitoring capabilities.
         </p>
       </div>
 
-      <Tabs defaultValue="api" className="w-full">
+      <Tabs defaultValue="performance" className="w-full">
         <TabsList className="grid w-full grid-cols-4">
-          <TabsTrigger value="api">REST API</TabsTrigger>
-          <TabsTrigger value="webhooks">Webhooks</TabsTrigger>
-          <TabsTrigger value="integrations">Integrations</TabsTrigger>
-          <TabsTrigger value="examples">Examples</TabsTrigger>
+          <TabsTrigger value="performance">Performance</TabsTrigger>
+          <TabsTrigger value="security">Security</TabsTrigger>
+          <TabsTrigger value="analytics">Analytics</TabsTrigger>
+          <TabsTrigger value="optimization">Optimization</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="api" className="space-y-6">
+        <TabsContent value="performance" className="space-y-6">
+          {/* Real-time Queue Status */}
           <Card className="glass-card p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-playfair font-semibold">API Endpoints</h3>
-              <Badge variant="outline" className="border-gold-500/30 text-gold-400">
-                v1.0
+            <div className="flex items-center justify-between mb-4">
+              <h4 className="text-xl font-playfair font-semibold gradient-text">
+                Queue Management
+              </h4>
+              <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
+                Healthy
               </Badge>
             </div>
+            
+            <div className="grid grid-cols-3 gap-4">
+              <div className="text-center">
+                <div className="text-2xl font-bold text-yellow-400">{queueStatus.pending}</div>
+                <div className="text-sm text-foreground/60">Pending</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-blue-400">{queueStatus.processing}</div>
+                <div className="text-sm text-foreground/60">Processing</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-green-400">{queueStatus.completed}</div>
+                <div className="text-sm text-foreground/60">Completed</div>
+              </div>
+            </div>
+          </Card>
+
+          {/* Model Performance Comparison */}
+          <Card className="glass-card p-6">
+            <h4 className="text-xl font-playfair font-semibold mb-4 gradient-text">
+              Model Performance
+            </h4>
             <div className="space-y-4">
-              {apiEndpoints.map((endpoint, index) => (
-                <div key={index} className="border border-white/10 rounded-lg p-4">
-                  <div className="flex items-center space-x-3 mb-3">
-                    <Badge 
-                      variant="outline" 
-                      className={
-                        endpoint.method === "POST" 
-                          ? "border-green-500/30 text-green-400" 
-                          : "border-blue-500/30 text-blue-400"
-                      }
-                    >
-                      {endpoint.method}
-                    </Badge>
-                    <code className="text-sm font-mono text-foreground">{endpoint.endpoint}</code>
-                    <Button size="sm" variant="ghost">
-                      <Copy className="w-4 h-4" />
-                    </Button>
+              {modelPerformance.map((model, index) => (
+                <div key={index} className="flex items-center justify-between p-4 bg-black/20 rounded-lg">
+                  <div>
+                    <div className="font-semibold">{model.name}</div>
+                    <div className="text-sm text-foreground/60">
+                      Avg: {model.avgTime} • Cost: {model.cost}
+                    </div>
                   </div>
-                  <p className="text-foreground/70 mb-3">{endpoint.description}</p>
-                  <div className="bg-black/20 rounded-md p-3">
-                    <pre className="text-xs text-foreground/80 overflow-x-auto">
-                      <code>{endpoint.example}</code>
-                    </pre>
+                  <div className="flex items-center space-x-4">
+                    <div className="text-right">
+                      <div className="text-sm text-foreground/60">Reliability</div>
+                      <div className="font-semibold">{model.reliability}%</div>
+                    </div>
+                    <Progress value={model.reliability} className="w-20" />
                   </div>
                 </div>
               ))}
             </div>
           </Card>
+
+          {/* Performance Optimizations */}
+          <Card className="glass-card p-6">
+            <h4 className="text-xl font-playfair font-semibold mb-4 gradient-text">
+              Active Optimizations
+            </h4>
+            <div className="grid gap-4">
+              {performanceOptimizations.map((optimization, index) => {
+                const IconComponent = optimization.icon;
+                return (
+                  <div key={index} className="flex items-center justify-between p-4 bg-black/20 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-10 bg-gradient-to-br from-gold-400 to-gold-600 rounded-lg flex items-center justify-center">
+                        <IconComponent className="w-5 h-5 text-black" />
+                      </div>
+                      <div>
+                        <div className="font-semibold">{optimization.title}</div>
+                        <div className="text-sm text-foreground/60">{optimization.description}</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Badge variant={optimization.impact === 'High' ? 'default' : 'outline'}>
+                        {optimization.impact} Impact
+                      </Badge>
+                      <CheckCircle className="w-5 h-5 text-green-400" />
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </Card>
         </TabsContent>
 
-        <TabsContent value="webhooks" className="space-y-6">
+        <TabsContent value="security" className="space-y-6">
           <Card className="glass-card p-6">
-            <h3 className="text-xl font-playfair font-semibold mb-6">Webhook Configuration</h3>
-            <div className="space-y-4">
-              <div className="border border-white/10 rounded-lg p-4">
-                <h4 className="font-semibold mb-2 flex items-center">
-                  <Webhook className="w-4 h-4 mr-2 text-gold-400" />
-                  Webhook Endpoint Setup
-                </h4>
-                <div className="bg-black/20 rounded-md p-3 mb-3">
-                  <code className="text-sm text-foreground/80">
-                    POST https://your-app.com/webhooks/ai-generator
-                  </code>
-                </div>
-                <p className="text-sm text-foreground/60">
-                  Configure your webhook endpoint to receive real-time notifications about generation status and events.
-                </p>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-4">
-                {webhookEvents.map((webhook, index) => (
-                  <div key={index} className="border border-white/10 rounded-lg p-4">
-                    <h5 className="font-medium text-foreground mb-1">{webhook.event}</h5>
-                    <p className="text-sm text-foreground/60">{webhook.description}</p>
+            <h4 className="text-xl font-playfair font-semibold mb-4 gradient-text">
+              Security & Compliance
+            </h4>
+            <div className="grid gap-4">
+              {securityFeatures.map((feature, index) => {
+                const IconComponent = feature.icon;
+                return (
+                  <div key={index} className="flex items-center justify-between p-4 bg-black/20 rounded-lg">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-10 h-10 bg-gradient-to-br from-green-400 to-green-600 rounded-lg flex items-center justify-center">
+                        <IconComponent className="w-5 h-5 text-black" />
+                      </div>
+                      <div>
+                        <div className="font-semibold">{feature.title}</div>
+                        <div className="text-sm text-foreground/60">{feature.description}</div>
+                      </div>
+                    </div>
+                    <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
+                      {feature.status}
+                    </Badge>
                   </div>
-                ))}
+                );
+              })}
+            </div>
+          </Card>
+
+          {/* Content Safety */}
+          <Card className="glass-card p-6">
+            <h4 className="text-xl font-playfair font-semibold mb-4 gradient-text">
+              Content Safety Metrics
+            </h4>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="text-center p-4 bg-black/20 rounded-lg">
+                <div className="text-2xl font-bold text-green-400">99.7%</div>
+                <div className="text-sm text-foreground/60">Safe Content Rate</div>
+              </div>
+              <div className="text-center p-4 bg-black/20 rounded-lg">
+                <div className="text-2xl font-bold text-blue-400">0.3%</div>
+                <div className="text-sm text-foreground/60">Flagged Content</div>
               </div>
             </div>
           </Card>
         </TabsContent>
 
-        <TabsContent value="integrations" className="space-y-6">
-          <div className="grid md:grid-cols-3 gap-6">
-            <Card className="glass-card p-6 text-center">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Code className="w-6 h-6 text-white" />
+        <TabsContent value="analytics" className="space-y-6">
+          <Card className="glass-card p-6">
+            <h4 className="text-xl font-playfair font-semibold mb-4 gradient-text">
+              Performance Analytics
+            </h4>
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="text-center p-4 bg-black/20 rounded-lg">
+                <Clock className="w-8 h-8 text-gold-400 mx-auto mb-2" />
+                <div className="text-xl font-bold">4.2s</div>
+                <div className="text-sm text-foreground/60">Avg Processing</div>
               </div>
-              <h3 className="font-semibold mb-2">Creative Software</h3>
-              <p className="text-sm text-foreground/60 mb-4">
-                Direct plugins for Adobe Creative Suite, Figma, and Sketch
-              </p>
-              <Button size="sm" variant="outline">
-                <ExternalLink className="w-4 h-4 mr-2" />
-                Download
-              </Button>
-            </Card>
+              <div className="text-center p-4 bg-black/20 rounded-lg">
+                <BarChart3 className="w-8 h-8 text-blue-400 mx-auto mb-2" />
+                <div className="text-xl font-bold">94.8%</div>
+                <div className="text-sm text-foreground/60">Success Rate</div>
+              </div>
+              <div className="text-center p-4 bg-black/20 rounded-lg">
+                <DollarSign className="w-8 h-8 text-green-400 mx-auto mb-2" />
+                <div className="text-xl font-bold">$247</div>
+                <div className="text-sm text-foreground/60">Monthly Cost</div>
+              </div>
+              <div className="text-center p-4 bg-black/20 rounded-lg">
+                <Activity className="w-8 h-8 text-purple-400 mx-auto mb-2" />
+                <div className="text-xl font-bold">12.3K</div>
+                <div className="text-sm text-foreground/60">Total Requests</div>
+              </div>
+            </div>
+          </Card>
 
-            <Card className="glass-card p-6 text-center">
-              <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Cloud className="w-6 h-6 text-white" />
+          {/* Usage Trends */}
+          <Card className="glass-card p-6">
+            <h4 className="text-xl font-playfair font-semibold mb-4 gradient-text">
+              Usage Trends (Last 30 Days)
+            </h4>
+            <div className="h-48 bg-black/20 rounded-lg flex items-center justify-center">
+              <div className="text-foreground/60">
+                Interactive analytics chart would be displayed here
               </div>
-              <h3 className="font-semibold mb-2">Cloud Storage</h3>
-              <p className="text-sm text-foreground/60 mb-4">
-                Automatic sync with Google Drive, Dropbox, and Adobe Creative Cloud
-              </p>
-              <Button size="sm" variant="outline">
-                <ExternalLink className="w-4 h-4 mr-2" />
-                Connect
-              </Button>
-            </Card>
-
-            <Card className="glass-card p-6 text-center">
-              <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Zap className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="font-semibold mb-2">Automation</h3>
-              <p className="text-sm text-foreground/60 mb-4">
-                Zapier, Make.com, and custom automation workflows
-              </p>
-              <Button size="sm" variant="outline">
-                <ExternalLink className="w-4 h-4 mr-2" />
-                Automate
-              </Button>
-            </Card>
-          </div>
+            </div>
+          </Card>
         </TabsContent>
 
-        <TabsContent value="examples" className="space-y-6">
-          <div className="space-y-6">
-            {integrationExamples.map((example, index) => (
-              <Card key={index} className="glass-card p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-lg font-semibold">{example.platform}</h3>
-                  <div className="flex space-x-2">
-                    <Button size="sm" variant="ghost">
-                      <Copy className="w-4 h-4 mr-2" />
-                      Copy
-                    </Button>
-                    <Button size="sm" variant="ghost">
-                      <Play className="w-4 h-4 mr-2" />
-                      Test
-                    </Button>
+        <TabsContent value="optimization" className="space-y-6">
+          <Card className="glass-card p-6">
+            <h4 className="text-xl font-playfair font-semibold mb-4 gradient-text">
+              Cost Optimization Suggestions
+            </h4>
+            <div className="space-y-3">
+              {costOptimization.length > 0 ? (
+                costOptimization.map((suggestion, index) => (
+                  <div key={index} className="flex items-start space-x-3 p-3 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
+                    <AlertTriangle className="w-5 h-5 text-yellow-400 mt-0.5" />
+                    <div className="text-sm">{suggestion}</div>
                   </div>
+                ))
+              ) : (
+                <div className="flex items-center space-x-3 p-3 bg-green-500/10 border border-green-500/20 rounded-lg">
+                  <CheckCircle className="w-5 h-5 text-green-400" />
+                  <div className="text-sm">All systems optimized! No recommendations at this time.</div>
                 </div>
-                <p className="text-foreground/70 mb-4">{example.description}</p>
-                <div className="bg-black/20 rounded-md p-4">
-                  <pre className="text-sm text-foreground/80 overflow-x-auto">
-                    <code>{example.code}</code>
-                  </pre>
+              )}
+            </div>
+          </Card>
+
+          {/* A/B Testing */}
+          <Card className="glass-card p-6">
+            <h4 className="text-xl font-playfair font-semibold mb-4 gradient-text">
+              A/B Testing Framework
+            </h4>
+            <div className="space-y-4">
+              <div className="p-4 bg-black/20 rounded-lg">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="font-semibold">Model Performance Test</div>
+                  <Badge className="bg-blue-500/20 text-blue-400 border-blue-500/30">
+                    Running
+                  </Badge>
                 </div>
-              </Card>
-            ))}
-          </div>
+                <div className="text-sm text-foreground/60 mb-3">
+                  Comparing SDXL vs Lightning for portrait generation
+                </div>
+                <Progress value={67} className="h-2" />
+                <div className="text-xs text-foreground/50 mt-1">67% complete • 3 days remaining</div>
+              </div>
+              
+              <Button className="w-full border-gold-500/30 text-gold-400 hover:bg-gold-500/10" variant="outline">
+                Create New A/B Test
+              </Button>
+            </div>
+          </Card>
+
+          {/* Custom Model Training */}
+          <Card className="glass-card p-6">
+            <h4 className="text-xl font-playfair font-semibold mb-4 gradient-text">
+              Custom Model Training
+            </h4>
+            <div className="space-y-4">
+              <div className="p-4 bg-black/20 rounded-lg">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="font-semibold">Brand Style Model</div>
+                    <div className="text-sm text-foreground/60">Fashion photography fine-tuning</div>
+                  </div>
+                  <Badge className="bg-green-500/20 text-green-400 border-green-500/30">
+                    Ready
+                  </Badge>
+                </div>
+              </div>
+              
+              <Button className="w-full bg-gradient-to-r from-gold-500 to-gold-600 text-black hover:from-gold-400 hover:to-gold-500">
+                Start Model Training
+              </Button>
+            </div>
+          </Card>
         </TabsContent>
       </Tabs>
     </div>
