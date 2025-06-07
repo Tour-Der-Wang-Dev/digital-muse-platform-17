@@ -12,6 +12,7 @@ import { CommercialLicensing } from "@/components/CommercialLicensing";
 import { ProfessionalFeatures } from "@/components/ProfessionalFeatures";
 import { QualityEthics } from "@/components/QualityEthics";
 import { MarketingSection } from "@/components/MarketingSection";
+import { EnterprisePlanning } from "@/components/EnterprisePlanning";
 import { PremiumFooter } from "@/components/PremiumFooter";
 import { WorkspaceManager } from "@/components/WorkspaceManager";
 import { PerformanceMonitor } from "@/components/PerformanceMonitor";
@@ -33,6 +34,7 @@ const Index = () => {
         <MarketingSection />
         <CommercialLicensing />
         <ProfessionalFeatures />
+        <EnterprisePlanning />
         <QualityEthics />
       </main>
       <PremiumFooter />
